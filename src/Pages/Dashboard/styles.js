@@ -3,7 +3,8 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#24233D'
+        backgroundColor: '#24233D',
+        gap: 48
     },
     newTag: {
         width: '100%',
@@ -45,6 +46,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#FFFFFF1A'
+    },
+    tasksContainer: {
+        gap: 16,
+        flex: 1
     }
 })
 
