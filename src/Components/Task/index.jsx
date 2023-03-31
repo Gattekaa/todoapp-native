@@ -2,14 +2,13 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import Icon from 'react-native-vector-icons/Ionicons';
 const { io } = require("socket.io-client");
 import fetchDelete from "../../Helpers/fetchDelete";
-const Task = (todo) => {
-    console.log(todo.title)
+const Task = (todo, socket) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.btn} />
             <Text style={styles.title}>{todo?.title}</Text>
             <View style={styles.btnContainer}>
-                <TouchableOpacity style={styles.btn} onPress={() => fetchDelete(todo.id)}>
+                <TouchableOpacity style={styles.btn} onPress={() => fetchDelete(todo.id, socket)}>
                     <Text style={{transform: [{translateX: 2}]}}><Icon name="trash" size={18} color="#ffff" />;</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.btn}>

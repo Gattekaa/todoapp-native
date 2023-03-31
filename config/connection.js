@@ -3,7 +3,7 @@ import axios from 'axios'
 const { token } = parseCookies()
  */
 const connection = axios.create({
-    baseURL: 'http://192.168.15.8:3000/api',
+    baseURL: 'http://localhost:3000/api',
 })
 
 

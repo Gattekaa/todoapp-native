@@ -9,10 +9,11 @@ const { io } = require("socket.io-client");
 import fetchNewTag from "../../Helpers/fetchNewTag";
 import getData from "../../Helpers/getData";
 import Task from "../../Components/Task";
+import connection from "../../../config/connection";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
-  let socket = io();
+  const socket = io('http://localhost:3000/api/', {transports: ['websocket']});
   const initialState = {
     id: "",
     title: "",
@@ -26,8 +27,7 @@ const Dashboard = () => {
   });
 
   const socketInitializer = async () => {
-    await fetch("/api/socket");
-    socket = io();
+    //await connection.get('/socket');
     socket.on("get-data", (data) => {
       console.log('test')
       getData(user, setTodo, setLoading);
@@ -35,13 +35,17 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    socketInitializer();
-    getData(user, setTodo);
+    const socket = io('http://localhost:3000/api/socket', {
 
-    return () => {
-      socket.disconnect();
-    };
-  }, [user.id]);
+    });
+
+    socket.on("get-data", (data) => {
+      console.log('test')
+    })
+
+
+
+  }, )
 
   return (
     <SafeAreaView style={styles.container}>
@@ -61,7 +65,7 @@ const Dashboard = () => {
           <View style={styles.newTagContainer}>
             <TouchableOpacity
               onPress={() =>
-                fetchNewTag(setNewTag, /* socket, */ initialState, user, newTag)
+                fetchNewTag(setNewTag, socket, initialState, user, newTag)
               }
               style={styles.newTagFetchButton}
             >
@@ -78,7 +82,7 @@ const Dashboard = () => {
           data={todo}
           keyExtractor={(todo) => todo.id}
           ItemSeparatorComponent={() => <View style={{height: 16}} />}
-          renderItem={({item}) => Task(item)}
+          renderItem={({item}) => Task(item, socket)}
         />
       </View>
     </SafeAreaView>
