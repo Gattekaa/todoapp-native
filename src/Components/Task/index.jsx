@@ -2,9 +2,10 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import Icon from 'react-native-vector-icons/Ionicons';
 const { io } = require("socket.io-client");
 import fetchDelete from "../../Helpers/fetchDelete";
+import Animated, { FadeInDown } from "react-native-reanimated";
 const Task = (todo, socket) => {
     return (
-        <View style={styles.container}>
+        <Animated.View entering={FadeInDown} style={styles.container}>
             <TouchableOpacity style={styles.btn} />
             <Text style={styles.title}>{todo?.title}</Text>
             <View style={styles.btnContainer}>
@@ -15,7 +16,7 @@ const Task = (todo, socket) => {
                     <Text style={{transform: [{translateX: 2}]}}><Icon name="pencil" size={18} color="#ffff" />;</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </Animated.View>
     )
 }
 
