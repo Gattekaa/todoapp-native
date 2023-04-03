@@ -8,6 +8,7 @@ import Login from '../src/Pages/Login';
 import Register from '../src/Pages/Register';
 import Routes from '../src/Routes';
 import { AuthProvider } from '../src/contexts/AuthContext';
+import Toast from 'react-native-toast-message';
 
 const Stack = createNativeStackNavigator();
 function App() {
@@ -15,6 +16,7 @@ function App() {
     <AuthProvider>
       <NavigationContainer independent={true} >
         <Routes />
+        <Toast />
       </NavigationContainer>
     </AuthProvider>
 

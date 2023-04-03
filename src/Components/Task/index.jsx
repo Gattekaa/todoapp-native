@@ -1,12 +1,15 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import Icon from 'react-native-vector-icons/Ionicons';
+import { MaterialCommunityIcons } from 'react-native-vector-icons';
 const { io } = require("socket.io-client");
 import fetchDelete from "../../Helpers/fetchDelete";
 import Animated, { FadeInDown } from "react-native-reanimated";
-const Task = (todo, socket) => {
+const Task = (todo) => {
     return (
         <Animated.View entering={FadeInDown} style={styles.container}>
-            <TouchableOpacity style={styles.btn} />
+            <TouchableOpacity style={[{backgroundColor: todo.done ? "#6bb100" : "transparent"},styles.btn]}>
+            {todo.done ? <MaterialCommunityIcons name="check"  color={'white'} size={20} /> : null}
+            </TouchableOpacity>
             <Text style={styles.title}>{todo?.title}</Text>
             <View style={styles.btnContainer}>
                 <TouchableOpacity style={styles.btn} onPress={() => fetchDelete(todo.id, socket)}>
@@ -47,7 +50,7 @@ const styles = StyleSheet.create({
         height: 35,
         borderWidth: 1,
         borderRadius: 9999,
-        borderColor: '#ffff',
+        borderColor: '#ccc',
         justifyContent: 'center',
         textAlign: 'center',
         alignItems: 'center'

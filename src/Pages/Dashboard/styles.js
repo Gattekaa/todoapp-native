@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         height: 30,
         borderWidth: 2,
         borderRadius: 9999,
-        borderColor: '#ffffff99'
+        borderColor: '#ccc'
     },
     textInput: {
         flex: 1,

@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import jwt_decode from "jwt-decode";
+import Toast from 'react-native-toast-message';
 
 //import { toast } from "react-toastify";
 import { useNavigation } from "@react-navigation/native";
@@ -47,16 +48,10 @@ export function AuthProvider({ children }) {
         data: { message },
       },
     }) {
-      /*       toast.error(message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      }); */
+      Toast.show({
+        type: 'error',
+        text1: message,
+      });
     }
   }
 
@@ -84,16 +79,10 @@ export function AuthProvider({ children }) {
         data: { message },
       },
     }) {
-      /*       toast.error(message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      }); */
+      Toast.show({
+        type: 'error',
+        text1: message,
+      });
     }
   }
 

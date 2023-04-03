@@ -5,7 +5,12 @@
       "bundler": "metro"
     },
     "name": "todo-app",
-    "slug": "todo-app"
+    "plugins": [
+      "@notifee/react-native"
+    ],
+    "slug": "todo-app",
+    "android": {
+      "package": "com.todoapp"
+    }
   }
-  
 }
