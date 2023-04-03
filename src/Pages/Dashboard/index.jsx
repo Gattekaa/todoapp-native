@@ -8,6 +8,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import fetchNewTag from "../../Helpers/fetchNewTag";
 import getData from "../../Helpers/getData";
 import Task from "../../Components/Task";
+import EditModal from "../../Components/EditModal";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -17,11 +18,15 @@ const Dashboard = () => {
     description: "",
     done: false,
   };
-
+  const [showModal, setShowModal] = useState(true)
 
   const [todo, setTodo] = useState([]);
 
   const [newTag, setNewTag] = useState({
+    ...initialState,
+  });
+
+  const [editTag, setEditTag] = useState({
     ...initialState,
   });
 
@@ -32,6 +37,7 @@ useEffect(() => {
 }, [user.id])
   return (
     <SafeAreaView style={styles.container}>
+      {showModal ? EditModal(showModal, setShowModal, editTag, setEditTag, getData, user, setTodo) : null}
       <View style={styles.newTag}>
         <View style={styles.newTagWrapper}>
           <View style={styles.inputContainer}>
@@ -48,7 +54,7 @@ useEffect(() => {
           <View style={styles.newTagContainer}>
             <TouchableOpacity
               onPress={() =>
-                fetchNewTag(setNewTag, initialState, user, newTag)
+                fetchNewTag(setNewTag, initialState, user, newTag, setTodo)
               }
               style={styles.newTagFetchButton}
             >
@@ -65,7 +71,7 @@ useEffect(() => {
           data={todo}
           keyExtractor={(todo) => todo.id}
           ItemSeparatorComponent={() => <View style={{height: 16}} />}
-          renderItem={({item}) => Task(item)}
+          renderItem={({item}) => Task(item, getData, user, setTodo, showModal, setShowModal, setEditTag)}
         />
       </View>
     </SafeAreaView>

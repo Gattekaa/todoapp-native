@@ -1,12 +1,13 @@
 import connection from "../../config/connection";
+import getData from "./getData";
 
-export default async function fetchDelete(id, socket) {
-  console.log(socket)
+export default async function fetchDelete(id, user, setTodo) {
     try {
       const data = await connection.delete(`/task?id=${id}`);
-      socket.emit("refresh-data");
 
     } catch (err) {
       console.log(err);
+    } finally {
+      getData(user, setTodo)
     }
   }
