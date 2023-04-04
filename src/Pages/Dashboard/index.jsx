@@ -9,6 +9,7 @@ import fetchNewTag from "../../Helpers/fetchNewTag";
 import getData from "../../Helpers/getData";
 import Task from "../../Components/Task";
 import EditModal from "../../Components/EditModal";
+import { MaterialCommunityIcons } from "react-native-vector-icons";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -18,7 +19,7 @@ const Dashboard = () => {
     description: "",
     done: false,
   };
-  const [showModal, setShowModal] = useState(true)
+  const [showModal, setShowModal] = useState(false);
 
   const [todo, setTodo] = useState([]);
 
@@ -30,23 +31,50 @@ const Dashboard = () => {
     ...initialState,
   });
 
-useEffect(() => {
-  setInterval(() => {
-    getData(user, setTodo)
-  }, 2000 )
-}, [user.id])
+  useEffect(() => {
+    setInterval(() => {
+      getData(user, setTodo);
+    }, 2000);
+  }, [user.id]);
   return (
     <SafeAreaView style={styles.container}>
-      {showModal ? EditModal(showModal, setShowModal, editTag, setEditTag, getData, user, setTodo) : null}
+      {showModal
+        ? EditModal(
+            showModal,
+            setShowModal,
+            editTag,
+            setEditTag,
+            getData,
+            user,
+            setTodo
+          )
+        : null}
       <View style={styles.newTag}>
         <View style={styles.newTagWrapper}>
           <View style={styles.inputContainer}>
-            <TouchableOpacity style={styles.newTagBtn}></TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                {
+                  backgroundColor: newTag.done ? "#6bb100" : "transparent",
+                  borderColor: newTag.done ? "#6bb100" : "#ccc",
+                },
+                styles.newTagBtn,
+              ]}
+              onPress={() => setNewTag({ ...newTag, done: !newTag.done })}
+            >
+              {
+                newTag.done ? (
+                  <MaterialCommunityIcons name="check" color={"white"} size={20} />)
+                  : null
+              }
+            </TouchableOpacity>
             <TextInput
               placeholderTextColor={"#ffff"}
               value={newTag.title}
               maxLength={30}
               onChangeText={(e) => setNewTag({ ...newTag, title: e })}
+              onSubmitEditing={() => fetchNewTag(setNewTag, initialState, user, newTag, setTodo)}
+
               placeholder="Add a tag"
               style={styles.textInput}
             />
@@ -67,11 +95,20 @@ useEffect(() => {
       </View>
       <View style={styles.tasksContainer}>
         <FlatList
-        
           data={todo}
           keyExtractor={(todo) => todo.id}
-          ItemSeparatorComponent={() => <View style={{height: 16}} />}
-          renderItem={({item}) => Task(item, getData, user, setTodo, showModal, setShowModal, setEditTag)}
+          ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
+          renderItem={({ item }) =>
+            Task(
+              item,
+              getData,
+              user,
+              setTodo,
+              showModal,
+              setShowModal,
+              setEditTag
+            )
+          }
         />
       </View>
     </SafeAreaView>

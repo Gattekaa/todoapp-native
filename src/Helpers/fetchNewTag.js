@@ -7,6 +7,7 @@ export default async function fetchNewTag(setNewTag, initialState, user, newTag,
         id: user?.id,
         title: newTag?.title,
         description: newTag?.description,
+        done: newTag?.done
       });
     } catch (err) {
       console.log(err);

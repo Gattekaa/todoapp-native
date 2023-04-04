@@ -36,6 +36,12 @@ const EditModal = (
 
             <View style={styles.btnContainer}>
               <TouchableOpacity
+                style={[styles.btn, { backgroundColor: "#ccc" }]}
+                onPress={() => setShowModal(!showModal)}
+              >
+                <Text style={styles.textStyle}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
                 onPress={() =>
                   fetchTitleUpdate(
                     editTag,
@@ -48,12 +54,6 @@ const EditModal = (
                 style={styles.btn}
               >
                 <Text style={styles.textStyle}>Confirm</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[styles.btn, { backgroundColor: "#ccc" }]}
-                onPress={() => setShowModal(!showModal)}
-              >
-                <Text style={styles.textStyle}>Cancel</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     flexDirection: "column",
     width: "90%",
+    backgroundColor: "#181820",
     gap: 45,
     borderRadius: 20,
     padding: 30,
@@ -105,6 +106,7 @@ const styles = StyleSheet.create({
   },
   modalText: {
     marginBottom: 15,
+    color: "#ffff",
     fontWeight: 700,
     fontSize: 24,
     textAlign: "center",

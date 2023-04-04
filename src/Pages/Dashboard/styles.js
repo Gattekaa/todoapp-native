@@ -22,11 +22,12 @@ const styles = StyleSheet.create({
         gap: 16
     }, 
     newTagBtn: {
-        width: 30,
-        height: 30,
-        borderWidth: 2,
+        width: 35,
+        height: 35,
+        borderWidth: 1,
         borderRadius: 9999,
-        borderColor: '#ccc'
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     textInput: {
         flex: 1,

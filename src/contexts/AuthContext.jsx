@@ -18,7 +18,8 @@ export function AuthProvider({ children }) {
     async function loadStoragedData() {
       const storagedToken = await AsyncStorage.getItem("@TodoApp:user");
       if (storagedToken) {
-        connection.defaults.headers['Authorization'] = `Bearer ${JSON.parse(storagedToken)}`
+        console.log(JSON.parse(storagedToken))
+        connection.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(storagedToken)}`
         const data = connection
           .get("/isexpired")
           .then(() => {
@@ -41,6 +42,8 @@ export function AuthProvider({ children }) {
         username,
         password,
       });
+      console.log(connection.defaults.headers.common['Authorization'] = `Bearer ${data.token}`)
+      connection.defaults.headers.common['Authorization'] = `Bearer ${data.token}`
       await AsyncStorage.setItem("@TodoApp:user", JSON.stringify(data.token));
       setUser(data.user);
     } catch ({
@@ -69,7 +72,8 @@ export function AuthProvider({ children }) {
         password,
         password_confirm,
       });
-
+      //console.log(token)
+      connection.defaults.headers.common['Authorization'] = `Bearer ${token}`
       await AsyncStorage.setItem("@TodoApp:user", JSON.stringify(token));
 
       const { user } = jwt_decode(token, process.env.SECRET);

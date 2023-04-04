@@ -5,12 +5,18 @@
       "bundler": "metro"
     },
     "name": "todo-app",
-    "plugins": [
-      "@notifee/react-native"
-    ],
+    "plugins": [],
     "slug": "todo-app",
     "android": {
       "package": "com.todoapp"
+    },
+    "ios": {
+      "bundleIdentifier": "com.todoapp"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "554a9001-5d30-4cc9-913b-f85e39b1ac1b"
+      }
     }
   }
 }
