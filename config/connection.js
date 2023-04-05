@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios'
 const connection = axios.create({
-    baseURL: 'http://192.168.15.8:3000/api',
+    baseURL: 'https://gattekatodo.vercel.app/api',
 })
 
 

@@ -1,30 +1,29 @@
 import { createContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import jwt_decode from "jwt-decode";
-import Toast from 'react-native-toast-message';
-
-//import { toast } from "react-toastify";
-import { useNavigation } from "@react-navigation/native";
+import Toast from "react-native-toast-message";
 import connection from "../../config/connection";
-
 export const AuthContext = createContext({});
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const isAuthenticated = !!user;
-  const navigation = useNavigation();
 
-    useEffect(() => {
+  useEffect(() => {
     async function loadStoragedData() {
       const storagedToken = await AsyncStorage.getItem("@TodoApp:user");
       if (storagedToken) {
-        console.log(JSON.parse(storagedToken))
-        connection.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(storagedToken)}`
+        connection.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${JSON.parse(storagedToken)}`;
         const data = connection
           .get("/isexpired")
           .then(() => {
             if (!user) {
-              const { user } = jwt_decode(JSON.parse(storagedToken), process.env.SECRET);
+              const { user } = jwt_decode(
+                JSON.parse(storagedToken),
+                process.env.SECRET
+              );
               setUser(user);
             }
             return;
@@ -42,8 +41,9 @@ export function AuthProvider({ children }) {
         username,
         password,
       });
-      console.log(connection.defaults.headers.common['Authorization'] = `Bearer ${data.token}`)
-      connection.defaults.headers.common['Authorization'] = `Bearer ${data.token}`
+      connection.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${data.token}`;
       await AsyncStorage.setItem("@TodoApp:user", JSON.stringify(data.token));
       setUser(data.user);
     } catch ({
@@ -52,7 +52,7 @@ export function AuthProvider({ children }) {
       },
     }) {
       Toast.show({
-        type: 'error',
+        type: "error",
         text1: message,
       });
     }
@@ -72,8 +72,7 @@ export function AuthProvider({ children }) {
         password,
         password_confirm,
       });
-      //console.log(token)
-      connection.defaults.headers.common['Authorization'] = `Bearer ${token}`
+      connection.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       await AsyncStorage.setItem("@TodoApp:user", JSON.stringify(token));
 
       const { user } = jwt_decode(token, process.env.SECRET);
@@ -84,7 +83,7 @@ export function AuthProvider({ children }) {
       },
     }) {
       Toast.show({
-        type: 'error',
+        type: "error",
         text1: message,
       });
     }

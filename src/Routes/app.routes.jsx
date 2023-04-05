@@ -1,8 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useContext } from "react";
-import { Button, StyleSheet } from "react-native";
-import { Text } from "react-native";
-import { TouchableOpacity } from "react-native";
+import { Button } from "react-native";
 import { AuthContext } from "../contexts/AuthContext";
 import Dashboard from "../Pages/Dashboard";
 const AppStack = createNativeStackNavigator();

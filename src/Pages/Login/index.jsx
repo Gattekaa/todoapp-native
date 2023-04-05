@@ -1,11 +1,10 @@
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "./styles";
 import { useContext, useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import connection from "../../../config/connection";
 import { AuthContext } from "../../contexts/AuthContext";
 import Icon from "react-native-vector-icons/EvilIcons";
 import Animated, {
@@ -17,7 +16,6 @@ import Animated, {
   FadeOutDown,
   FadeInUp,
   cancelAnimation,
-  FadeIn,
   FadeInDown,
 } from "react-native-reanimated";
 

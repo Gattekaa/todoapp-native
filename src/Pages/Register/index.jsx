@@ -1,5 +1,5 @@
 import { Text, TouchableOpacity, View } from "react-native";
-import { ScrollView, TextInput } from "react-native-gesture-handler";
+import { TextInput } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "./styles";
@@ -15,7 +15,6 @@ import Animated, {
   FadeOutDown,
   FadeInUp,
   cancelAnimation,
-  FadeIn,
   FadeInDown,
 } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/EvilIcons";

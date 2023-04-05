@@ -2,11 +2,9 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 import { Entypo } from "react-native-vector-icons";
-const { io } = require("socket.io-client");
 import fetchDelete from "../../Helpers/fetchDelete";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import fetchUpdate from "../../Helpers/fetchUpdate";
-import {Platform} from 'react-native';
 const Task = (
   todo,
   getData,
@@ -21,9 +19,10 @@ const Task = (
       <TouchableOpacity
         onPress={() => fetchUpdate(todo, getData, user, setTodo)}
         style={[
-          { backgroundColor: todo.done ? "#6bb100" : "transparent",
+          {
+            backgroundColor: todo.done ? "#6bb100" : "transparent",
             borderColor: todo.done ? "#6bb100" : "#ccc",
-        },
+          },
           styles.btn,
         ]}
       >
@@ -34,13 +33,11 @@ const Task = (
       <Text style={styles.title}>{todo?.title}</Text>
       <View style={styles.btnContainer}>
         <TouchableOpacity
-          style={[styles.btn, {borderColor: '#ccc'}]}
+          style={[styles.btn, { borderColor: "#ccc" }]}
           onPress={() => fetchDelete(todo.id, user, setTodo)}
         >
-          <Text
-          style={{ transform: Platform.OS === 'ios' ? [{ translateX: 2 }] : [{ translateX: 0 }] }}
-          >
-            <Icon name="trash" size={18} color="#ffff" />;
+          <Text>
+            <Icon name="trash" size={18} color="#ffff" />
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -48,12 +45,10 @@ const Task = (
             setEditTag({ id: todo.id, title: todo.title }),
               setShowModal(!showModal);
           }}
-          style={[styles.btn, {borderColor: '#ccc'}]}
+          style={[styles.btn, { borderColor: "#ccc" }]}
         >
-          <Text
-          style={{ transform: Platform.OS === 'ios' ? [{ translateX: 2 }] : [{ translateX: 0 }] }}
-          >
-            <Entypo name="pencil" size={18} color="#ffff" />;
+          <Text>
+            <Entypo name="pencil" size={18} color="#ffff" />
           </Text>
         </TouchableOpacity>
       </View>
